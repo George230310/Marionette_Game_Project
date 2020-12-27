@@ -17,6 +17,7 @@ import com.google.gson.Gson;
 
 public class Game {
 	//define constants
+	public static final Gson gson = new Gson();
 	public static final int WINDOW_WIDTH = 1024;
 	public static final int WINDOW_HEIGHT = 768;
 	public static final int TITLE_X = 255;
@@ -40,7 +41,6 @@ public class Game {
 	public void LoadSceneFromJson(String filename) throws FileNotFoundException
 	{
 		//create reader object and read
-		Gson gson = new Gson();
 		Reader fReader = new FileReader(filename);
 		mCurrentScene = gson.fromJson(fReader, Scene.class);
 	}
