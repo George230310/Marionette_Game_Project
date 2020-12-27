@@ -37,7 +37,7 @@ public class Game {
 	private JFrame mGameWindow;
 	private Container mWindowContainer;
 	
-	//load a scene from a specific gson file
+	//load a scene from a specific Gson file
 	public void LoadSceneFromJson(String filename) throws FileNotFoundException
 	{
 		//create reader object and read
@@ -106,7 +106,7 @@ public class Game {
 		mGameWindow.setVisible(true);
 	}
 	
-	//test json file I/O
+	//test JSON file I/O
 	public void TestIO(String filename) throws FileNotFoundException
 	{
 		LoadSceneFromJson(filename);
