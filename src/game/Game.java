@@ -45,8 +45,8 @@ public class Game {
 		mCurrentScene = gson.fromJson(fReader, Scene.class);
 	}
 	
-	//initialize the menu at start of game
-	public void InitializeMenu()
+	//initialize game window
+	public void InitializeGameWindow()
 	{
 		//game window & window container
 		mGameWindow = new JFrame();
@@ -56,7 +56,11 @@ public class Game {
 		mGameWindow.getContentPane().setBackground(Color.blue);
 		mGameWindow.setLayout(null);
 		mWindowContainer = mGameWindow.getContentPane();
-		
+	}
+	
+	//initialize the menu at start of game
+	public void InitializeMenu()
+	{
 		//title panel
 		JPanel titleNamePanel = new JPanel();
 		titleNamePanel.setBounds(TITLE_X, TITLE_Y, TITLE_WIDTH, TITLE_HEIGHT);
@@ -112,6 +116,7 @@ public class Game {
 	public static void main(String[] args) {
 		//instantiate a game
 		Game game = new Game();
+		game.InitializeGameWindow();
 		game.InitializeMenu();
 		
 		//ONLY for testing I/O
