@@ -14,11 +14,15 @@ public class Scene {
 		buffer.append("Scene Description: ");
 		buffer.append(mDescription + "\n");
 		
+		buffer.append("\n");
+		
 		//append options
 		for(String each_str : mOptions)
 		{
 			buffer.append("Option: " + each_str + "\n");
 		}
+		
+		buffer.append("\n");
 		
 		//append references
 		for(String each_str: mOptionReferences)
