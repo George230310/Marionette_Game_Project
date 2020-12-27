@@ -1,0 +1,13 @@
+{
+    "mDescription": "This is a test.",
+    "mOptions": [
+        "option1",
+        "option2",
+        "option3"
+    ],
+    "mOptionReferences": [
+        "test2.json",
+        "test3.json",
+        "test4.json"
+    ]
+}
