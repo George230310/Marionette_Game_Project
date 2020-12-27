@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.Reader;
@@ -12,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import com.google.gson.Gson;
 
@@ -20,18 +23,26 @@ public class Game {
 	public static final Gson gson = new Gson();
 	public static final int WINDOW_WIDTH = 1024;
 	public static final int WINDOW_HEIGHT = 768;
+	
 	public static final int TITLE_X = 255;
 	public static final int TITLE_Y = 100;
 	public static final int TITLE_WIDTH = 512;
 	public static final int TITLE_HEIGHT = 150;
+	
 	public static final int OPTION_X = 255;
 	public static final int OPTION_Y = 300;
 	public static final int OPTION_WIDTH = 512;
 	public static final int OPTION_HEIGHT = 200;
 	
+	public static final int MAIN_TEXT_X = 255;
+	public static final int MAIN_TEXT_Y = 100;
+	public static final int MAIN_TEXT_WIDTH = 512;
+	public static final int MAIN_TEXT_HEIGHT = 400;
+	
 	//define fonts
 	public static final Font TITLE_FONT = new Font("SansSerif", Font.PLAIN, 88);
 	public static final Font MENU_FONT = new Font("SansSerif", Font.PLAIN, 36);
+	public static final Font MAIN_TEXT_FONT = new Font("SansSerif", Font.PLAIN, 28);
 	
 	private Scene mCurrentScene;
 	private JFrame mGameWindow;
@@ -61,6 +72,10 @@ public class Game {
 	//initialize the menu at start of game
 	public void InitializeMenu()
 	{
+		//clear anything in container
+		mWindowContainer.removeAll();
+		mWindowContainer.repaint();
+		
 		//title panel
 		JPanel titleNamePanel = new JPanel();
 		titleNamePanel.setBounds(TITLE_X, TITLE_Y, TITLE_WIDTH, TITLE_HEIGHT);
@@ -85,6 +100,7 @@ public class Game {
 		startButton.setForeground(Color.white);
 		startButton.setFont(MENU_FONT);
 		startButton.setFocusPainted(false);
+		startButton.addActionListener(new startButtonHandler());
 		menuOptionPanel.add(startButton);
 		
 		//load button
@@ -102,8 +118,47 @@ public class Game {
 		mWindowContainer.add(titleNamePanel);
 		mWindowContainer.add(menuOptionPanel);
 		
+		//update container
+		mWindowContainer.validate();
+		
 		//set window visible
 		mGameWindow.setVisible(true);
+	}
+	
+	//create the name input scene
+	public void CreateNameInputScene()
+	{
+		//clear the container
+		mWindowContainer.removeAll();
+		mWindowContainer.repaint();
+		
+		//create caption
+		JPanel nameInputPanel = new JPanel();
+		nameInputPanel.setLayout(new GridLayout(4, 0));
+		nameInputPanel.setBounds(MAIN_TEXT_X, MAIN_TEXT_Y, MAIN_TEXT_WIDTH, MAIN_TEXT_HEIGHT);
+		nameInputPanel.setBackground(Color.blue);
+		JLabel caption = new JLabel("Please enter your name and continue:");
+		caption.setForeground(Color.white);
+		caption.setFont(MAIN_TEXT_FONT);
+		nameInputPanel.add(caption);
+		
+		//create input box
+		JTextField nameBox = new JTextField();
+		nameBox.setFont(MAIN_TEXT_FONT);
+		nameInputPanel.add(nameBox);
+		
+		//create submit button
+		JButton nameSubmitButton = new JButton("Continue");
+		nameSubmitButton.setFont(MAIN_TEXT_FONT);
+		nameSubmitButton.setBackground(Color.gray);
+		nameSubmitButton.setForeground(Color.white);
+		nameSubmitButton.setFocusPainted(false);
+		nameInputPanel.add(nameSubmitButton);
+		
+		mWindowContainer.add(nameInputPanel);
+		
+		//update container
+		mWindowContainer.validate();
 	}
 	
 	//test JSON file I/O
@@ -111,6 +166,15 @@ public class Game {
 	{
 		LoadSceneFromJson(filename);
 		System.out.println(mCurrentScene.toString());
+	}
+	
+	//main menu start button handler
+	public class startButtonHandler implements ActionListener
+	{
+		public void actionPerformed(ActionEvent event)
+		{
+			CreateNameInputScene();
+		}
 	}
 
 	public static void main(String[] args) {
