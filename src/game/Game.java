@@ -44,6 +44,11 @@ public class Game {
 	public static final Font MENU_FONT = new Font("SansSerif", Font.PLAIN, 36);
 	public static final Font MAIN_TEXT_FONT = new Font("SansSerif", Font.PLAIN, 28);
 	
+	//define colors
+	public static final Color WINDOW_BKG = Color.darkGray;
+	public static final Color BUTTON_BKG = Color.gray;
+	public static final Color TEXT_COLOR = Color.white;
+	
 	private Scene mCurrentScene;
 	private JFrame mGameWindow;
 	private Container mWindowContainer;
@@ -64,7 +69,7 @@ public class Game {
 		mGameWindow.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
 		mGameWindow.setResizable(false);
 		mGameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		mGameWindow.getContentPane().setBackground(Color.blue);
+		mGameWindow.getContentPane().setBackground(WINDOW_BKG);
 		mGameWindow.setLayout(null);
 		mWindowContainer = mGameWindow.getContentPane();
 	}
@@ -79,11 +84,11 @@ public class Game {
 		//title panel
 		JPanel titleNamePanel = new JPanel();
 		titleNamePanel.setBounds(TITLE_X, TITLE_Y, TITLE_WIDTH, TITLE_HEIGHT);
-		titleNamePanel.setBackground(Color.blue);
+		titleNamePanel.setBackground(WINDOW_BKG);
 		
 		//title label
 		JLabel titleName = new JLabel("Marionette");
-		titleName.setForeground(Color.white);
+		titleName.setForeground(TEXT_COLOR);
 		titleName.setFont(TITLE_FONT);
 		
 		//add title to title panel
@@ -92,12 +97,12 @@ public class Game {
 		//menu option panel
 		JPanel menuOptionPanel = new JPanel();
 		menuOptionPanel.setBounds(OPTION_X, OPTION_Y, OPTION_WIDTH, OPTION_HEIGHT);
-		menuOptionPanel.setBackground(Color.blue);
+		menuOptionPanel.setBackground(WINDOW_BKG);
 		
 		//start button
 		JButton startButton = new JButton("Start A New Story");
-		startButton.setBackground(Color.gray);
-		startButton.setForeground(Color.white);
+		startButton.setBackground(BUTTON_BKG);
+		startButton.setForeground(TEXT_COLOR);
 		startButton.setFont(MENU_FONT);
 		startButton.setFocusPainted(false);
 		startButton.addActionListener(new startButtonHandler());
@@ -105,8 +110,8 @@ public class Game {
 		
 		//load button
 		JButton loadButton = new JButton("Continue A Story");
-		loadButton.setBackground(Color.gray);
-		loadButton.setForeground(Color.white);
+		loadButton.setBackground(BUTTON_BKG);
+		loadButton.setForeground(TEXT_COLOR);
 		loadButton.setFont(MENU_FONT);
 		loadButton.setFocusPainted(false);
 		menuOptionPanel.add(loadButton);
@@ -136,9 +141,9 @@ public class Game {
 		JPanel nameInputPanel = new JPanel();
 		nameInputPanel.setLayout(new GridLayout(4, 0));
 		nameInputPanel.setBounds(MAIN_TEXT_X, MAIN_TEXT_Y, MAIN_TEXT_WIDTH, MAIN_TEXT_HEIGHT);
-		nameInputPanel.setBackground(Color.blue);
+		nameInputPanel.setBackground(WINDOW_BKG);
 		JLabel caption = new JLabel("Please enter your name and continue:");
-		caption.setForeground(Color.white);
+		caption.setForeground(TEXT_COLOR);
 		caption.setFont(MAIN_TEXT_FONT);
 		nameInputPanel.add(caption);
 		
@@ -149,9 +154,9 @@ public class Game {
 		
 		//create submit button
 		JButton nameSubmitButton = new JButton("Continue");
-		nameSubmitButton.setFont(MAIN_TEXT_FONT);
-		nameSubmitButton.setBackground(Color.gray);
-		nameSubmitButton.setForeground(Color.white);
+		nameSubmitButton.setFont(MENU_FONT);
+		nameSubmitButton.setBackground(BUTTON_BKG);
+		nameSubmitButton.setForeground(TEXT_COLOR);
 		nameSubmitButton.setFocusPainted(false);
 		nameInputPanel.add(nameSubmitButton);
 		
