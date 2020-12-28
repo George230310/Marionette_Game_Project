@@ -52,6 +52,10 @@ public class Game {
 	private Scene mCurrentScene;
 	private JFrame mGameWindow;
 	private Container mWindowContainer;
+	private String mPlayerName;
+	
+	//name input box
+	private static JTextField mNameBox;
 	
 	//load a scene from a specific Gson file
 	public void LoadSceneFromJson(String filename) throws FileNotFoundException
@@ -148,9 +152,10 @@ public class Game {
 		nameInputPanel.add(caption);
 		
 		//create input box
-		JTextField nameBox = new JTextField();
-		nameBox.setFont(MAIN_TEXT_FONT);
-		nameInputPanel.add(nameBox);
+		mNameBox = new JTextField();
+		mNameBox.setFont(MAIN_TEXT_FONT);
+		mNameBox.setHorizontalAlignment(JTextField.CENTER);
+		nameInputPanel.add(mNameBox);
 		
 		//create submit button
 		JButton nameSubmitButton = new JButton("Continue");
@@ -158,6 +163,7 @@ public class Game {
 		nameSubmitButton.setBackground(BUTTON_BKG);
 		nameSubmitButton.setForeground(TEXT_COLOR);
 		nameSubmitButton.setFocusPainted(false);
+		nameSubmitButton.addActionListener(new nameSubmitButtonHandler());
 		nameInputPanel.add(nameSubmitButton);
 		
 		mWindowContainer.add(nameInputPanel);
@@ -179,6 +185,27 @@ public class Game {
 		public void actionPerformed(ActionEvent event)
 		{
 			CreateNameInputScene();
+		}
+	}
+	
+	//name submit button handler
+	public class nameSubmitButtonHandler implements ActionListener
+	{
+		public void actionPerformed(ActionEvent event)
+		{
+			String temp = mNameBox.getText();
+			
+			//validate input
+			if(temp.isEmpty())
+			{
+				System.out.println("No name input..."); //for debug
+			}
+			else
+			{
+				mPlayerName = new String(temp);
+				mNameBox.setText("");
+				System.out.println(mPlayerName);
+			}
 		}
 	}
 
