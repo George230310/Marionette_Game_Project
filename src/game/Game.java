@@ -14,42 +14,63 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import com.google.gson.Gson;
 
 public class Game {
-	//define constants
+	//DEFINE CONSTANTS
 	public static final Gson gson = new Gson();
 	public static final int WINDOW_WIDTH = 1024;
 	public static final int WINDOW_HEIGHT = 768;
 	
+	//game title panel
 	public static final int TITLE_X = 255;
 	public static final int TITLE_Y = 100;
 	public static final int TITLE_WIDTH = 512;
 	public static final int TITLE_HEIGHT = 150;
 	
+	//game menu panel
 	public static final int OPTION_X = 255;
 	public static final int OPTION_Y = 300;
 	public static final int OPTION_WIDTH = 512;
 	public static final int OPTION_HEIGHT = 200;
 	
+	//main text panel
 	public static final int MAIN_TEXT_X = 255;
 	public static final int MAIN_TEXT_Y = 100;
 	public static final int MAIN_TEXT_WIDTH = 512;
 	public static final int MAIN_TEXT_HEIGHT = 400;
 	
+	//in-game main text panel
+	public static final int INGAME_MAIN_TEXT_X = 102;
+	public static final int INGAME_MAIN_TEXT_Y = 75;
+	public static final int INGAME_MAIN_TEXT_WIDTH = 819;
+	public static final int INGAME_MAIN_TEXT_HEIGHT = 400;
+	
+	//in-game options panel
+	public static final int INGAME_OPTIONS_X = 307;
+	public static final int INGAME_OPTIONS_Y = 500;
+	public static final int INGAME_OPTIONS_WIDTH = 410;
+	public static final int INGAME_OPTIONS_HEIGHT = 200;
+	
 	//define fonts
 	public static final Font TITLE_FONT = new Font("SansSerif", Font.PLAIN, 88);
 	public static final Font MENU_FONT = new Font("SansSerif", Font.PLAIN, 36);
 	public static final Font MAIN_TEXT_FONT = new Font("SansSerif", Font.PLAIN, 28);
+	public static final Font INGAME_MAIN_TEXT_FONT = new Font("SansSerif", Font.PLAIN, 22);
+	public static final Font INGAME_OPTIONS_FONT = new Font("SansSerif", Font.PLAIN, 28);
 	
 	//define colors
 	public static final Color WINDOW_BKG = Color.darkGray;
 	public static final Color BUTTON_BKG = Color.gray;
 	public static final Color TEXT_COLOR = Color.white;
+	public static final Color INGAME_MAINTEXT_BKG = Color.gray;
+	public static final Color INGAME_BUTTON_BKG = Color.darkGray;
 	
 	private Scene mCurrentScene;
+	private String mCurrentSceneFileName;
 	private JFrame mGameWindow;
 	private Container mWindowContainer;
 	private String mPlayerName;
@@ -63,6 +84,9 @@ public class Game {
 		//create reader object and read
 		Reader fReader = new FileReader(filename);
 		mCurrentScene = gson.fromJson(fReader, Scene.class);
+		mCurrentSceneFileName = new String(filename);
+		
+		System.out.println(mCurrentSceneFileName + "\n"); //for debug ONLY
 	}
 	
 	//initialize game window
@@ -121,7 +145,7 @@ public class Game {
 		menuOptionPanel.add(loadButton);
 		
 		//menu option layout
-		menuOptionPanel.setLayout(new GridLayout(2, 0));
+		menuOptionPanel.setLayout(new GridLayout(2, 1));
 		
 		//add JPanels to window container
 		mWindowContainer.add(titleNamePanel);
@@ -143,7 +167,7 @@ public class Game {
 		
 		//create caption
 		JPanel nameInputPanel = new JPanel();
-		nameInputPanel.setLayout(new GridLayout(4, 0));
+		nameInputPanel.setLayout(new GridLayout(4, 1));
 		nameInputPanel.setBounds(MAIN_TEXT_X, MAIN_TEXT_Y, MAIN_TEXT_WIDTH, MAIN_TEXT_HEIGHT);
 		nameInputPanel.setBackground(WINDOW_BKG);
 		JLabel caption = new JLabel("Please enter your name and continue:");
@@ -169,6 +193,71 @@ public class Game {
 		mWindowContainer.add(nameInputPanel);
 		
 		//update container
+		mWindowContainer.validate();
+	}
+	
+	//prints current scene to game window
+	//CAUTION: There cannot be more than 4 options for a scene
+	public void CreateCurrentScene()
+	{
+		//check for existence of current scene
+		if(mCurrentScene == null)
+		{
+			return;
+		}
+		
+		mWindowContainer.removeAll();
+		mWindowContainer.repaint();
+		
+		//make main text panel
+		JPanel mainTextPanel = new JPanel();
+		mainTextPanel.setBounds(INGAME_MAIN_TEXT_X, INGAME_MAIN_TEXT_Y, INGAME_MAIN_TEXT_WIDTH, INGAME_MAIN_TEXT_HEIGHT);
+		mainTextPanel.setBackground(INGAME_MAINTEXT_BKG);
+		
+		//make main text area
+		String temp = "";
+		if(mCurrentScene != null)
+		{
+			temp = new String(mCurrentScene.mDescription);
+		}
+		
+		//replace player name
+		if(mPlayerName != null)
+		{
+			temp = temp.replaceAll("@", mPlayerName);
+		}
+		
+		//make main text area
+		JTextArea mainTextArea = new JTextArea(temp);
+		mainTextArea.setBounds(INGAME_MAIN_TEXT_X, INGAME_MAIN_TEXT_Y, INGAME_MAIN_TEXT_WIDTH, INGAME_MAIN_TEXT_HEIGHT);
+		mainTextArea.setBackground(INGAME_MAINTEXT_BKG);
+		mainTextArea.setForeground(TEXT_COLOR);
+		mainTextArea.setFont(INGAME_MAIN_TEXT_FONT);
+		mainTextArea.setLineWrap(true);
+		mainTextArea.setEditable(false);
+		mainTextPanel.add(mainTextArea);
+		
+		//add main text panel to container
+		mWindowContainer.add(mainTextPanel);
+		
+		//create option buttons panel
+		JPanel buttonsPanel = new JPanel();
+		buttonsPanel.setBounds(INGAME_OPTIONS_X, INGAME_OPTIONS_Y, INGAME_OPTIONS_WIDTH, INGAME_OPTIONS_HEIGHT);
+		buttonsPanel.setBackground(INGAME_BUTTON_BKG);
+		buttonsPanel.setLayout(new GridLayout(4, 1));
+		
+		//create option buttons
+		for(int i = 0; i < mCurrentScene.mOptions.length; i++)
+		{
+			optionButton newButton = new optionButton(mCurrentScene.mOptions[i], mCurrentScene.mOptionReferences[i]);
+			newButton.setFocusPainted(false);
+			buttonsPanel.add(newButton);
+		}
+		
+		
+		//add option buttons panel to container
+		mWindowContainer.add(buttonsPanel);
+		
 		mWindowContainer.validate();
 	}
 	
@@ -205,6 +294,52 @@ public class Game {
 				mPlayerName = new String(temp);
 				mNameBox.setText("");
 				System.out.println(mPlayerName);
+				
+				//load the first scene
+				try {
+					LoadSceneFromJson("testJson/test1.json");
+				} catch (FileNotFoundException e) {
+					System.out.println("File Not Found");
+				}
+				
+				//print the current scene
+				CreateCurrentScene();
+			}
+		}
+	}
+	
+	//customed button for in-game options
+	public class optionButton extends JButton
+	{
+		private static final long serialVersionUID = -7225007505306667685L;
+		private String URL;
+		
+		public optionButton(String text, String url)
+		{
+			super(text);
+			setFont(INGAME_OPTIONS_FONT);
+			setBackground(BUTTON_BKG);
+			setForeground(TEXT_COLOR);
+			URL = url;
+			addActionListener(new optionButtonHandler());
+		}
+		
+		public String getURL()
+		{
+			return URL;
+		}
+		
+		public class optionButtonHandler implements ActionListener
+		{
+			public void actionPerformed(ActionEvent event)
+			{
+				try {
+					LoadSceneFromJson(URL);
+				} catch (FileNotFoundException e) {
+					System.out.println("File Not Found");
+				}
+				
+				CreateCurrentScene();
 			}
 		}
 	}

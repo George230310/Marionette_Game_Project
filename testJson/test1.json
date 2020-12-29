@@ -1,13 +1,13 @@
 {
-    "mDescription": "This is a test.",
+    "mDescription": "Hello @! This is a test.",
     "mOptions": [
         "option1",
         "option2",
         "option3"
     ],
     "mOptionReferences": [
-        "test2.json",
-        "test3.json",
-        "test4.json"
+        "testJson/test2.json",
+        "testJson/test3.json",
+        "testJson/test4.json"
     ]
 }

@@ -1,0 +1,13 @@
+{
+    "mDescription": "Hello @! You got here with option 1.",
+    "mOptions": [
+        "1.option1",
+        "1.option2",
+        "1.option3"
+    ],
+    "mOptionReferences": [
+        "testJson/test5.json",
+        "testJson/test6.json",
+        "testJson/test7.json"
+    ]
+}
