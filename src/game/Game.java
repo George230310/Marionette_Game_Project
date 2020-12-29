@@ -60,7 +60,7 @@ public class Game {
 	public static final Font MENU_FONT = new Font("SansSerif", Font.PLAIN, 36);
 	public static final Font MAIN_TEXT_FONT = new Font("SansSerif", Font.PLAIN, 28);
 	public static final Font INGAME_MAIN_TEXT_FONT = new Font("SansSerif", Font.PLAIN, 22);
-	public static final Font INGAME_OPTIONS_FONT = new Font("SansSerif", Font.PLAIN, 28);
+	public static final Font INGAME_OPTIONS_FONT = new Font("SansSerif", Font.PLAIN, 24);
 	
 	//define colors
 	public static final Color WINDOW_BKG = Color.darkGray;
@@ -183,7 +183,7 @@ public class Game {
 		
 		//create submit button
 		JButton nameSubmitButton = new JButton("Continue");
-		nameSubmitButton.setFont(MENU_FONT);
+		nameSubmitButton.setFont(MAIN_TEXT_FONT);
 		nameSubmitButton.setBackground(BUTTON_BKG);
 		nameSubmitButton.setForeground(TEXT_COLOR);
 		nameSubmitButton.setFocusPainted(false);
