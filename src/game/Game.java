@@ -66,7 +66,7 @@ public class Game {
 	public static final Color WINDOW_BKG = Color.darkGray;
 	public static final Color BUTTON_BKG = Color.gray;
 	public static final Color TEXT_COLOR = Color.white;
-	public static final Color INGAME_MAINTEXT_BKG = Color.gray;
+	public static final Color INGAME_MAINTEXT_BKG = Color.darkGray;
 	public static final Color INGAME_BUTTON_BKG = Color.darkGray;
 	
 	private Scene mCurrentScene;
