@@ -198,6 +198,7 @@ public class Game {
 	
 	//prints current scene to game window
 	//CAUTION: There cannot be more than 4 options for a scene
+	//CAUTION: The # of references must match the # of options
 	public void CreateCurrentScene()
 	{
 		//check for existence of current scene
