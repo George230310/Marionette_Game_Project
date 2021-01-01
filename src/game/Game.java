@@ -339,6 +339,7 @@ public class Game {
 		{
 			public void actionPerformed(ActionEvent event)
 			{
+				//TODO: reinitialize menu
 				try {
 					LoadSceneFromJson(URL);
 				} catch (FileNotFoundException e) {
