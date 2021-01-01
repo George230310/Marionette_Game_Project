@@ -147,6 +147,8 @@ public class Game {
 		//menu option layout
 		menuOptionPanel.setLayout(new GridLayout(2, 1));
 		
+		//TODO: create credit???
+		
 		//add JPanels to window container
 		mWindowContainer.add(titleNamePanel);
 		mWindowContainer.add(menuOptionPanel);
@@ -255,6 +257,8 @@ public class Game {
 			buttonsPanel.add(newButton);
 		}
 		
+		//TODO: make save button and implement save function
+		
 		
 		//add option buttons panel to container
 		mWindowContainer.add(buttonsPanel);
@@ -310,6 +314,7 @@ public class Game {
 	}
 	
 	//customed button for in-game options
+	//TODO: implement last scene return to menu
 	public class optionButton extends JButton
 	{
 		private static final long serialVersionUID = -7225007505306667685L;
