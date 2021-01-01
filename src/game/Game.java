@@ -297,13 +297,18 @@ public class Game {
 		{
 			String temp = mNameBox.getText();
 			
+			//TODO: 1.Duplicate name with the characters 2.Room for an eastern egg(Using our name)
+			
 			//validate input
 			if(temp.isEmpty())
 			{
 				System.out.println("No name input..."); //for debug
+			} 
+			else if(temp.length() >= 10 ) {
+				System.out.println("No name input...");
 			}
 			else
-			{
+			{ 
 				mPlayerName = new String(temp);
 				mNameBox.setText("");
 				System.out.println(mPlayerName);
