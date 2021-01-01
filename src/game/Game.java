@@ -130,6 +130,8 @@ public class Game {
 		//start button
 		JButton startButton = new JButton("Start A New Story");
 		startButton.setBackground(BUTTON_BKG);
+		startButton.setOpaque(true);
+		startButton.setBorderPainted(false);
 		startButton.setForeground(TEXT_COLOR);
 		startButton.setFont(MENU_FONT);
 		startButton.setFocusPainted(false);
@@ -139,6 +141,8 @@ public class Game {
 		//load button
 		JButton loadButton = new JButton("Continue A Story");
 		loadButton.setBackground(BUTTON_BKG);
+		loadButton.setOpaque(true);
+		loadButton.setBorderPainted(false);
 		loadButton.setForeground(TEXT_COLOR);
 		loadButton.setFont(MENU_FONT);
 		loadButton.setFocusPainted(false);
@@ -187,6 +191,8 @@ public class Game {
 		JButton nameSubmitButton = new JButton("Continue");
 		nameSubmitButton.setFont(MAIN_TEXT_FONT);
 		nameSubmitButton.setBackground(BUTTON_BKG);
+		nameSubmitButton.setOpaque(true);
+		nameSubmitButton.setBorderPainted(false);
 		nameSubmitButton.setForeground(TEXT_COLOR);
 		nameSubmitButton.setFocusPainted(false);
 		nameSubmitButton.addActionListener(new nameSubmitButtonHandler());
@@ -253,6 +259,8 @@ public class Game {
 		for(int i = 0; i < mCurrentScene.mOptions.length; i++)
 		{
 			optionButton newButton = new optionButton(mCurrentScene.mOptions[i], mCurrentScene.mOptionReferences[i]);
+			newButton.setOpaque(true);
+			newButton.setBorderPainted(false);
 			newButton.setFocusPainted(false);
 			buttonsPanel.add(newButton);
 		}
