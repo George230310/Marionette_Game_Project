@@ -18,7 +18,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import com.google.gson.Gson;
-//Test git
+
 public class Game {
 	//DEFINE CONSTANTS
 	public static final Gson gson = new Gson();
