@@ -16,6 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
 
 import com.google.gson.Gson;
 
@@ -133,7 +134,7 @@ public class Game {
 		JButton startButton = new JButton("Start A New Story");
 		startButton.setBackground(BUTTON_BKG);
 		startButton.setOpaque(true);
-		startButton.setBorderPainted(false);
+		//startButton.setBorderPainted(false);
 		startButton.setForeground(TEXT_COLOR);
 		startButton.setFont(MENU_FONT);
 		startButton.setFocusPainted(false);
@@ -144,7 +145,7 @@ public class Game {
 		JButton loadButton = new JButton("Continue A Story");
 		loadButton.setBackground(BUTTON_BKG);
 		loadButton.setOpaque(true);
-		loadButton.setBorderPainted(false);
+		//loadButton.setBorderPainted(false);
 		loadButton.setForeground(TEXT_COLOR);
 		loadButton.setFont(MENU_FONT);
 		loadButton.setFocusPainted(false);
@@ -194,7 +195,7 @@ public class Game {
 		nameSubmitButton.setFont(MAIN_TEXT_FONT);
 		nameSubmitButton.setBackground(BUTTON_BKG);
 		nameSubmitButton.setOpaque(true);
-		nameSubmitButton.setBorderPainted(false);
+		//nameSubmitButton.setBorderPainted(false);
 		nameSubmitButton.setForeground(TEXT_COLOR);
 		nameSubmitButton.setFocusPainted(false);
 		nameSubmitButton.addActionListener(new nameSubmitButtonHandler());
@@ -262,7 +263,7 @@ public class Game {
 		{
 			optionButton newButton = new optionButton(mCurrentScene.mOptions[i], mCurrentScene.mOptionReferences[i]);
 			newButton.setOpaque(true);
-			newButton.setBorderPainted(false);
+			//newButton.setBorderPainted(false);
 			newButton.setFocusPainted(false);
 			buttonsPanel.add(newButton);
 		}
@@ -354,7 +355,15 @@ public class Game {
 		{
 			public void actionPerformed(ActionEvent event)
 			{
-				//TODO: reinitialize menu
+				
+				//if links to this special URL, return to main menu
+				if(URL.equals("returnToMenu"))
+				{
+					InitializeMenu();
+					return;
+				}
+				
+				//otherwise load the correct scene
 				try {
 					LoadSceneFromJson(URL);
 				} catch (FileNotFoundException e) {
@@ -367,6 +376,17 @@ public class Game {
 	}
 
 	public static void main(String[] args) {
+		
+		//set to cross-platform look and feel
+		try
+		{
+			UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+		
 		//instantiate a game
 		Game game = new Game();
 		game.InitializeGameWindow();
