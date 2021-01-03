@@ -304,7 +304,7 @@ public class Game {
 			{
 				System.out.println("No name input..."); //for debug
 			} 
-			else if(temp.length() >= 10 ) {
+			else if(temp.length() >= 10) {
 				System.out.println("No name input...");
 			}
 			else
