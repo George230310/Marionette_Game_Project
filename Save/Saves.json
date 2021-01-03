@@ -1,0 +1,10 @@
+[
+    {
+        "mName": "Save1",
+        "mJsonName": "testJson/test1.json"
+    },
+    {
+        "mName": "Save2",
+        "mJsonName": "testJson/test2.json"
+    }
+]

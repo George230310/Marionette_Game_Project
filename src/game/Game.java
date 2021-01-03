@@ -75,6 +75,7 @@ public class Game {
 	private JFrame mGameWindow;
 	private Container mWindowContainer;
 	private String mPlayerName;
+	private Save[] mSaves;
 	
 	//collaberate
 	
@@ -90,6 +91,13 @@ public class Game {
 		mCurrentSceneFileName = new String(filename);
 		
 		System.out.println(mCurrentSceneFileName + "\n"); //for debug ONLY
+	}
+	
+	public void LoadSavesFromJson(String filename) throws FileNotFoundException
+	{
+		//read saves into game
+		Reader fReader = new FileReader(filename);
+		mSaves = gson.fromJson(fReader, Save[].class);
 	}
 	
 	//initialize game window
@@ -280,12 +288,36 @@ public class Game {
 		System.out.println(mCurrentScene.toString());
 	}
 	
+	//test Saves I/O
+	public void TestSaves()
+	{
+		for(Save each_save : mSaves)
+		{
+			System.out.println(each_save.toString());
+		}
+	}
+	
 	//main menu start button handler
 	public class startButtonHandler implements ActionListener
 	{
 		public void actionPerformed(ActionEvent event)
 		{
 			CreateNameInputScene();
+		}
+	}
+	
+	//main menu load saves button
+	public class loadButtonHandler implements ActionListener
+	{
+		public void actionPerformed(ActionEvent event)
+		{
+			mWindowContainer.removeAll();
+			mWindowContainer.repaint();
+			
+			
+			
+			
+			mWindowContainer.validate();
 		}
 	}
 	
@@ -326,7 +358,6 @@ public class Game {
 	}
 	
 	//customed button for in-game options
-	//TODO: implement last scene return to menu
 	public class optionButton extends JButton
 	{
 		private static final long serialVersionUID = -7225007505306667685L;
@@ -387,6 +418,16 @@ public class Game {
 		Game game = new Game();
 		game.InitializeGameWindow();
 		game.InitializeMenu();
+		
+		//load game saves
+		try {
+			game.LoadSavesFromJson("Save/Saves.json");
+		} catch (FileNotFoundException e1) {
+			System.out.println("File Not Found");
+		}
+		
+		//ONLY for testing saves loading
+		game.TestSaves();
 		
 		//ONLY for testing I/O
 		try {
