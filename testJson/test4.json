@@ -9,5 +9,6 @@
         "testJson/test11.json",
         "testJson/test12.json",
         "returnToMenu"
-    ]
+    ],
+    "mSceneName": "Test 4."
 }

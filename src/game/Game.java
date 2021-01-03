@@ -56,6 +56,12 @@ public class Game {
 	public static final int INGAME_OPTIONS_WIDTH = 410;
 	public static final int INGAME_OPTIONS_HEIGHT = 200;
 	
+	//in-game chapter text panel
+	public static final int INGAME_CHAPTER_X = 50;
+	public static final int INGAME_CHAPTER_Y = 580;
+	public static final int INGAME_CHAPTERTEXTBOX_WIDTH = 200;
+	public static final int INGAME_CHAPTERTEXTBOX_HIGHT = 95;
+	
 	//define fonts
 	public static final Font TITLE_FONT = new Font("SansSerif", Font.PLAIN, 88);
 	public static final Font MENU_FONT = new Font("SansSerif", Font.PLAIN, 36);
@@ -67,7 +73,7 @@ public class Game {
 	public static final Color WINDOW_BKG = Color.darkGray;
 	public static final Color BUTTON_BKG = Color.gray;
 	public static final Color TEXT_COLOR = Color.white;
-	public static final Color INGAME_MAINTEXT_BKG = Color.darkGray;
+	public static final Color INGAME_MAINTEXT_BKG = Color.green;
 	public static final Color INGAME_BUTTON_BKG = Color.darkGray;
 	
 	private Scene mCurrentScene;
@@ -277,6 +283,19 @@ public class Game {
 		
 		//add option buttons panel to container
 		mWindowContainer.add(buttonsPanel);
+		
+		//print chapter name and create chapter box to scene
+		JTextArea chapterTextBox = new JTextArea(mCurrentScene.mSceneName);
+		chapterTextBox.setBounds(INGAME_CHAPTER_X, INGAME_CHAPTER_Y, INGAME_CHAPTERTEXTBOX_WIDTH, INGAME_CHAPTERTEXTBOX_HIGHT);
+		chapterTextBox.setBackground(WINDOW_BKG);
+		chapterTextBox.setEditable(false);
+		chapterTextBox.setLineWrap(true);
+		chapterTextBox.setFont(MENU_FONT);
+		chapterTextBox.setForeground(TEXT_COLOR);
+		
+		
+		//add chapter name box to window
+		mWindowContainer.add(chapterTextBox);
 		
 		mWindowContainer.validate();
 	}

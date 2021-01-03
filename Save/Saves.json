@@ -1,10 +1,12 @@
 [
     {
         "mName": "Save1",
-        "mJsonName": "testJson/test1.json"
+        "mJsonName": "testJson/test1.json",
+	"mSceneName": "Test 1"
     },
     {
         "mName": "Save2",
-        "mJsonName": "testJson/test2.json"
+        "mJsonName": "testJson/test2.json",
+        "mSceneName": "Test 2"
     }
 ]

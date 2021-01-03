@@ -9,5 +9,6 @@
         "testJson/test8.json",
         "testJson/test9.json",
         "testJson/test10.json"
-    ]
+    ],
+    "mSceneName": "Test 3."
 }
