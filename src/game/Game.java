@@ -76,7 +76,7 @@ public class Game {
 	private Container mWindowContainer;
 	private String mPlayerName;
 	
-	//try pull request
+	//collaberate
 	
 	//name input box
 	private static JTextField mNameBox;
