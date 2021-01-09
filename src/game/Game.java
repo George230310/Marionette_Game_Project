@@ -8,6 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.Reader;
 
 import javax.swing.JButton;
@@ -19,10 +21,12 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 public class Game {
 	//DEFINE CONSTANTS
 	public static final Gson gson = new Gson();
+	public static final Gson gson2 = new GsonBuilder().setPrettyPrinting().create();
 	public static final int WINDOW_WIDTH = 1024;
 	public static final int WINDOW_HEIGHT = 768;
 	
@@ -76,6 +80,9 @@ public class Game {
 	public static final Color INGAME_MAINTEXT_BKG = Color.green;
 	public static final Color INGAME_BUTTON_BKG = Color.darkGray;
 	
+	//save file path
+	public static final String SAVE_FILE_PATH = "Save/Saves.json";
+	
 	private Scene mCurrentScene;
 	private String mCurrentSceneFileName;
 	private JFrame mGameWindow;
@@ -88,7 +95,7 @@ public class Game {
 	//name input box
 	private static JTextField mNameBox;
 	
-	//load a scene from a specific Gson file
+	//load a scene from a specific json file
 	public void LoadSceneFromJson(String filename) throws FileNotFoundException
 	{
 		//create reader object and read
@@ -99,11 +106,21 @@ public class Game {
 		System.out.println(mCurrentSceneFileName + "\n"); //for debug ONLY
 	}
 	
+	//load a save from a specific json file
 	public void LoadSavesFromJson(String filename) throws FileNotFoundException
 	{
 		//read saves into game
 		Reader fReader = new FileReader(filename);
 		mSaves = gson.fromJson(fReader, Save[].class);
+	}
+	
+	//prints current saves in memory to file
+	public void printSavesToJson() throws IOException
+	{
+		FileWriter writer = new FileWriter(SAVE_FILE_PATH);
+		gson2.toJson(mSaves, writer);
+		writer.flush();
+		writer.close();
 	}
 	
 	//initialize game window
@@ -440,7 +457,7 @@ public class Game {
 		
 		//load game saves
 		try {
-			game.LoadSavesFromJson("Save/Saves.json");
+			game.LoadSavesFromJson(SAVE_FILE_PATH);
 		} catch (FileNotFoundException e1) {
 			System.out.println("File Not Found");
 		}
